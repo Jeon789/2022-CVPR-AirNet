@@ -39,6 +39,7 @@ if __name__ == '__main__':
 
             if epoch < opt.epochs_encoder:
                 _, output, target, _ = net.E(x_query=degrad_patch_1, x_key=degrad_patch_2)
+                breakpoint()
                 contrast_loss = CE(output, target)
                 loss = contrast_loss
             else:

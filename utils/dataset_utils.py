@@ -44,8 +44,12 @@ class TrainDataset(Dataset):
 
     def _init_clean_ids(self):
         clean_ids = []
-        name_list = os.listdir(self.args.denoise_dir)
-        clean_ids += [self.args.denoise_dir + id_ for id_ in name_list]
+        # name_list = os.listdir(self.args.denoise_dir)
+        # clean_ids += [self.args.denoise_dir + id_ for id_ in name_list]
+
+        denoise_dataset_list = [self.args.denoise_dir + dataset for dataset in  os.listdir(self.args.denoise_dir)] # 절대경로 모음
+        for dataset in denoise_dataset_list:
+            clean_ids += [os.path.join(dataset, id_) for id_ in os.listdir(dataset)]
 
         if 'denoise_15' in self.de_type:
             self.s15_ids = copy.deepcopy(clean_ids)

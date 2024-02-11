@@ -92,6 +92,7 @@ if __name__ == '__main__':
         opt.batch_size = 5
         ckpt_path = opt.ckpt_path + 'All.pth'
 
+    breakpoint()
     denoise_set = DenoiseTestDataset(opt)
     derain_set = DerainDehazeDataset(opt)
 
