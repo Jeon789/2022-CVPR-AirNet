@@ -39,7 +39,6 @@ if __name__ == '__main__':
 
             if epoch < opt.epochs_encoder:
                 _, output, target, _ = net.E(x_query=degrad_patch_1, x_key=degrad_patch_2)
-                breakpoint()
                 contrast_loss = CE(output, target)
                 loss = contrast_loss
             else:
@@ -64,7 +63,8 @@ if __name__ == '__main__':
                 ), '\r', end='')
 
         GPUS = 1
-        if (epoch + 1) % 50 == 0:
+        # if (epoch + 1) % 50 == 0: ##TODO
+        if True:
             checkpoint = {
                 "net": net.state_dict(),
                 'optimizer': optimizer.state_dict(),

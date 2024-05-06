@@ -96,13 +96,15 @@ class TrainDataset(Dataset):
         return gt_name
 
     def _get_nonhazy_name(self, hazy_name):
-        dir_name = hazy_name.split("synthetic")[0] + 'original/'
+        # dir_name = hazy_name.split("synthetic")[0] + 'original/'
+        dir_name = hazy_name.split("dehazing")[0] + 'dehazing/clear/'
         name = hazy_name.split('/')[-1].split('_')[0]
         suffix = '.' + hazy_name.split('.')[-1]
         nonhazy_name = dir_name + name + suffix
         return nonhazy_name
 
     def __getitem__(self, _):
+        breakpoint()
         de_id = self.de_dict[self.de_type[self.de_temp]]
 
         if de_id < 3:
@@ -125,7 +127,7 @@ class TrainDataset(Dataset):
             # clean_id = random.randint(0, len(self.clean_ids) - 1)
             clean_img = crop_img(np.array(Image.open(clean_id).convert('RGB')), base=16)
             clean_patch_1, clean_patch_2 = self.crop_transform(clean_img), self.crop_transform(clean_img)
-            clean_patch_1, clean_patch_2 = np.array(clean_patch_1), np.array(clean_patch_2)
+            clean_patch_1, clean_patch_2 = np.array(clean_patch_1), np.array(clean_patch_2)  # (H W 3)
 
             # clean_name = self.clean_ids[clean_id].split("/")[-1].split('.')[0]
             clean_name = clean_id.split("/")[-1].split('.')[0]
